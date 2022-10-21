@@ -1,1 +1,0 @@
-# pixelplex_nodejs_course_task_2
