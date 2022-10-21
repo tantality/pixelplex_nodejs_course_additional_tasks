@@ -1,10 +1,10 @@
-interface INumberCounter{
+export interface INumberCounter{
   [key:string]:number
 }
 
 export const solve=(arr:number[]):number => getOddInt(getNumberCounter(arr));
 
-function getNumberCounter(arr:number[]):INumberCounter {
+export function getNumberCounter(arr:number[]):INumberCounter {
   return arr.reduce((accumulator:INumberCounter,currentNumber:number) => {
     currentNumber in accumulator? accumulator[currentNumber]+=1 : accumulator[currentNumber]=1;
     return accumulator;
