@@ -1,11 +1,13 @@
 {
-  "name": "2__asynchrony",
+  "name": "asynchronous-task",
   "version": "1.0.0",
-  "description": "Node.js asynchrony examples",
+  "description": "",
+  "type": "commonjs",
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
+    "start":"node index.js",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js --fix ."
   },
