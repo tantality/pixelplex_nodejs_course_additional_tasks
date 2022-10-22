@@ -7,8 +7,7 @@
   },
   "scripts": {
     "lint": "eslint --ext .js .",
-    "lint:fix": "eslint --ext .js --fix .",
-    "clear": "rm -rf data/*"
+    "lint:fix": "eslint --ext .js --fix ."
   },
   "keywords": [],
   "author": "",
@@ -21,8 +20,5 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"
-  },
-  "dependencies": {
-    "node-fetch": "^2.6.7"
   }
 }
