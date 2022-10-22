@@ -1,6 +1,6 @@
 // TASK: Попробуйте изменять переменные и понаблюдать, что получится.
 const secure = true;
-const sendSuccessfully = false;
+const sendSuccessfully = true;
 
 const createConnection = () => {
   console.log('Opening connection...');
@@ -57,7 +57,7 @@ createConnection()
       prepared: false,
     };
 
-    const promise = prepareData(data, connection)
+    const promise = prepareData(data)
       .then((prepared) => connection.serializeData(prepared))
       .then((serialized) => {
         return {
