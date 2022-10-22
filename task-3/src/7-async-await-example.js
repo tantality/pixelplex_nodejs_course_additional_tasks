@@ -2,6 +2,7 @@ const fs = require('fs/promises');
 const crypto = require('crypto');
 const path = require('path');
 const util = require('util');
+const fetch = require('node-fetch');
 
 const URL = 'https://jsonplaceholder.typicode.com/users';
 
