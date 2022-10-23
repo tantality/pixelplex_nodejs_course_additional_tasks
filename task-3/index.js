@@ -66,7 +66,7 @@ async function main() {
     await sendData(connection, data);
     console.log('Sent');
   } catch (err) {
-    return console.error(err);
+    console.error(err);
   }
 }
 
