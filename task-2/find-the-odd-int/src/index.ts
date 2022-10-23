@@ -37,7 +37,7 @@ function parseArr(str: string): NumberArrOrNull {
       }
     });
 
-  if (!AreArrayItemsInts(arr)) {
+  if (!areArrayItemsInts(arr)) {
     return generateError('please enter an array of integers');
   }
 
@@ -58,7 +58,7 @@ function generateError(msg: string): null {
   return null;
 }
 
-function AreArrayItemsInts(arr: number[]): boolean {
+function areArrayItemsInts(arr: number[]): boolean {
   return arr.every((item) => !isNaN(item));
 }
 
@@ -70,5 +70,5 @@ function isCounterContainsOneOddNumber(numberCounter: INumberCounter): boolean {
     return accumulator;
   }, 0);
 
-  return !result || result > 1 ? false : true;
+  return !!result && result <= 1;
 }
