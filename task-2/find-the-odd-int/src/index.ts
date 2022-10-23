@@ -53,8 +53,14 @@ function isArray(str: string): boolean {
 }
 
 function generateError(msg: string): null {
-  // eslint-disable-next-line no-console
-  console.log(`error: ${msg}`);
+  try {
+    throw new Error(msg);
+  } catch (err) {
+    if (err instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.log(`error: ${err.message}`);
+    }
+  }
   return null;
 }
 
