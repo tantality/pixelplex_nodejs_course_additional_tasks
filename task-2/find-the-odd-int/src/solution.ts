@@ -1,4 +1,4 @@
-import { generateError } from './index';
+import { generateError } from './../../index';
 
 export interface INumberCounter {
   [key: string]: number;
@@ -9,7 +9,8 @@ export const solve = (arr: number[]): number | null => {
   if (isCounterContainsOneOddNumber(numberCounter)) {
     return getOddInt(numberCounter);
   } else {
-    return generateError('there should be only one number in the array that occurs an odd number of times');
+    generateError('there should be only one number in the array that occurs an odd number of times');
+    return null;
   }
 };
 

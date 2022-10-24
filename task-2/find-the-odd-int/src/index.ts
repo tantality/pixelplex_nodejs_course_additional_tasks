@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import { solve } from './solution';
+import { generateError, showMessage } from './../../index';
 
 type NumberArrOrNull = number[] | null;
 
@@ -24,7 +25,8 @@ program
 
 function parseArr(str: string): NumberArrOrNull {
   if (!isArray(str)) {
-    return generateError('please enter an array of integers');
+    generateError('please enter an array of integers');
+    return null;
   }
 
   const arr: number[] = str
@@ -40,30 +42,14 @@ function parseArr(str: string): NumberArrOrNull {
     });
 
   if (!areArrayItemsInts(arr)) {
-    return generateError('please enter an array of integers');
+    generateError('please enter an array of integers');
+    return null;
   }
   return arr;
 }
 
 function isArray(str: string): boolean {
   return str[0] === '[' && str.slice(-1) === ']';
-}
-
-export function generateError(msg: string): null {
-  try {
-    throw new Error(msg);
-  } catch (err) {
-    if (err instanceof Error) {
-      showMessage(`error: ${err.message}`);
-    }
-  }
-
-  return null;
-}
-
-function showMessage(msg: string): void {
-  // eslint-disable-next-line no-console
-  console.log(msg);
 }
 
 function areArrayItemsInts(arr: number[]): boolean {
