@@ -24,34 +24,32 @@ program
   .parse(process.argv);
 
 function parseArr(str: string): NumberArrOrNull {
-  if (!isArray(str)) {
+  if (!isIntArr(str)) {
     generateError('please enter an array of integers');
     return null;
   }
 
-  const arr: number[] = str
+  return getArr(str);
+}
+
+function isIntArr(str: string): boolean {
+  const findAllNumbers = /(\d+)|([\+-]?\d+)/g;
+  const matches: string[] | null = str.match(findAllNumbers);
+  if (!matches) {
+    return false;
+  }
+  const totalLengthOfMatches = matches.join('').length;
+  const isStrContainsSquareBrackets = str[0] === '[' && str.slice(-1) === ']';
+  const numberOfSquareBrackets = 2;
+  str = str.split(' ').join('');
+  const strLength = str.length;
+
+  return isStrContainsSquareBrackets && totalLengthOfMatches + numberOfSquareBrackets === strLength;
+}
+
+function getArr(str: string): number[] {
+  return str
     .slice(1, str.length - 1)
     .split(' ')
-    .map((item: string) => {
-      const number = Number(item);
-      if (!Number.isInteger(number) || item === '') {
-        return NaN;
-      } else {
-        return number;
-      }
-    });
-
-  if (!areArrayItemsInts(arr)) {
-    generateError('please enter an array of integers');
-    return null;
-  }
-  return arr;
-}
-
-function isArray(str: string): boolean {
-  return str[0] === '[' && str.slice(-1) === ']';
-}
-
-function areArrayItemsInts(arr: number[]): boolean {
-  return arr.every((item) => !isNaN(item));
+    .map((item: string) => Number(item));
 }
