@@ -3,11 +3,7 @@ const sumCubes = (str: string): number =>
 const reverseStr = (str: string): string => str.split('').reverse().join('');
 const rotateStr = (str: string): string => str.slice(1) + str.slice(0, 1);
 
-export function solve(str: string, size: number): string {
-  const strLength = str.length;
-  if (size <= 0 || !strLength || size > strLength) {
-    return '';
-  }
+export function solve(str: string, size: number, strLength: number): string {
   let result = '';
   for (let ind = 0; ind < strLength; ind += size) {
     const fragment = str.slice(ind, ind + size);

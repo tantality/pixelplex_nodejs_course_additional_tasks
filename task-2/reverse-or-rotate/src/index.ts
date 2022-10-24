@@ -12,11 +12,19 @@ program
   .requiredOption('-str, --string <value>', 'a string consisting of integers')
   .requiredOption('-sz, --size <value>', 'the number that is the length of the fragments')
   .action(({ string, size }) => {
-    if (!canCharBeInt(size) || !size) {
-      generateError('-sz (--size) must be an integer greater than 0');
+    const strLength = string.length;
+    if (!canCharBeInt(size) || size <= 0) {
+      generateError('-sz (--size) must be an integer >= 0');
+      return;
     }
+
+    if (size > strLength) {
+      generateError('-sz (--size) must be less than the length of the -str (--string)');
+      return;
+    }
+
     if (canStringBeInt(string)) {
-      showMessage(`reverse and rotate result is ${solve(string, size)}`);
+      showMessage(`reverse and rotate result is ${solve(string, size, strLength)}`);
     } else {
       generateError('-str (--string). Please enter a string consisting of integers');
     }
