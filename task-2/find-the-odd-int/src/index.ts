@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { solve, getNumberCounter, INumberCounter } from './solution';
+import { solve } from './solution';
 
 type NumberArrOrNull = number[] | null;
 
@@ -14,8 +14,10 @@ program
   .action(({ input }) => {
     const arr: NumberArrOrNull = parseArr(input);
     if (arr) {
-      // eslint-disable-next-line no-console
-      console.log(`a number that occurs an odd number of times is ${solve(arr)}`);
+      const result = solve(arr);
+      if (result) {
+        showMessage(`a number that occurs an odd number of times is ${result}`);
+      }
     }
   })
   .parse(process.argv);
@@ -40,41 +42,30 @@ function parseArr(str: string): NumberArrOrNull {
   if (!areArrayItemsInts(arr)) {
     return generateError('please enter an array of integers');
   }
-
-  if (isCounterContainsOneOddNumber(getNumberCounter(arr))) {
-    return arr;
-  } else {
-    return generateError('there should be only one number in the array that occurs an odd number of times');
-  }
+  return arr;
 }
 
 function isArray(str: string): boolean {
   return str[0] === '[' && str.slice(-1) === ']';
 }
 
-function generateError(msg: string): null {
+export function generateError(msg: string): null {
   try {
     throw new Error(msg);
   } catch (err) {
     if (err instanceof Error) {
-      // eslint-disable-next-line no-console
-      console.log(`error: ${err.message}`);
+      showMessage(`error: ${err.message}`);
     }
   }
+
   return null;
+}
+
+function showMessage(msg: string): void {
+  // eslint-disable-next-line no-console
+  console.log(msg);
 }
 
 function areArrayItemsInts(arr: number[]): boolean {
   return arr.every((item) => !isNaN(item));
-}
-
-function isCounterContainsOneOddNumber(numberCounter: INumberCounter): boolean {
-  const result = Object.values(numberCounter).reduce((accumulator: number, currentNumber: number) => {
-    if (currentNumber % 2) {
-      accumulator++;
-    }
-    return accumulator;
-  }, 0);
-
-  return !!result && result <= 1;
 }
