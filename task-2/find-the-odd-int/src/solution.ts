@@ -1,16 +1,13 @@
-import { generateError } from './../../index';
-
 export interface INumberCounter {
   [key: string]: number;
 }
 
-export const solve = (arr: number[]): number | null => {
+export const solve = (arr: number[]): number | never => {
   const numberCounter: INumberCounter = getNumberCounter(arr);
   if (isCounterContainsOneOddNumber(numberCounter)) {
     return getOddInt(numberCounter);
   } else {
-    generateError('there should be only one number in the array that occurs an odd number of times');
-    return null;
+    throw new Error('there should be only one number in the array that occurs an odd number of times');
   }
 };
 

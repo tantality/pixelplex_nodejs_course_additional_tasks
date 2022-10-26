@@ -1,8 +1,6 @@
 import { Command } from 'commander';
 import { solve } from './solution';
-import { generateError, showMessage } from './../../index';
-
-type NumberArrOrNull = number[] | null;
+import { showMessage } from './../../index';
 
 const program = new Command();
 
@@ -13,20 +11,25 @@ program
     'an array of integers. There should be only one number in the array that occurs an odd number of times',
   )
   .action(({ input }) => {
-    const arr: NumberArrOrNull = parseArr(input);
-    if (arr) {
-      const result = solve(arr);
-      if (result) {
-        showMessage(`a number that occurs an odd number of times is ${result}`);
+    try {
+      const arr: number[] = parseArr(input);
+      if (arr) {
+        const result = solve(arr);
+        if (result) {
+          showMessage(`a number that occurs an odd number of times is ${result}`);
+        }
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        showMessage(`error: ${err.message}`);
       }
     }
   })
   .parse(process.argv);
 
-function parseArr(str: string): NumberArrOrNull {
+function parseArr(str: string): number[] {
   if (!isIntArr(str)) {
-    generateError('please enter an array of integers');
-    return null;
+    throw new Error('please enter an array of integers');
   }
 
   return getArr(str);
